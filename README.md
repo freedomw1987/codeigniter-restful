@@ -16,6 +16,6 @@ hints until the default controller demo is built and ready.
 
 To Build up the Doctrine model, please defined the table in the application/models/model
 
-For DAL which is only for SQL editing, can look application/models/dal/chatroom_dal.php
+Files in application/models/dal which is only for SQL editing, example:(application/models/dal/chatroom_dal.php)
 
-application/models/bll is for the logical layout.
+Files in application/models/bll is for the logical layout. example:(application/models/dal/chatroom_dal.php)
