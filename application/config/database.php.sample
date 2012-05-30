@@ -58,6 +58,9 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 $db['default']['port'] = 3306;
 
+require(APPPATH. '/config/doctrine.php');
+
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -2,7 +2,7 @@
 
 require APPPATH.'/libraries/REST_Controller.php';
 
-class Chatroom extends REST_Controller
+class Example extends REST_Controller
 {
 
   /**
@@ -15,9 +15,6 @@ class Chatroom extends REST_Controller
     public function list_get()
     {
       $option = $this->option();
-      if (!$option['limit']) {
-        $option['limit'] = DEFAULT_LIMIT;
-      }
       $this->response(Chatroom_bll::get($option));
     }
 
