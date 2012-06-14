@@ -2,6 +2,8 @@
 	/**
 	* 
 	*/
+	require_once dirname(__FILE__).'/dal/dal_lib.php';
+	
 	class Dal extends Dal_lib
 	{
     

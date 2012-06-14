@@ -2,6 +2,8 @@
 	/**
 	* 
 	*/
+	require_once dirname(__FILE__).'/bll/bll_lib.php';
+	
 	class Bll extends Bll_lib
 	{
 	  protected static $_dal_name = NULL;
