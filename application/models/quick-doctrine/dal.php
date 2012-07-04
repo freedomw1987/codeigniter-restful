@@ -47,7 +47,9 @@
 		  } catch (Exception $e) {
 		    throw new Exception("[".__METHOD__."]".$e->getMessage(), 1);
 		  }
-			return static::select(array('id' => $id));
+      $result = static::select(array('id' => $id));
+			return $result[0];
+			
 		}
 
 		public static function insert($option = array())
