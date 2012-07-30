@@ -70,6 +70,29 @@
 				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
 			}
 		}
+		
+		static function orWhere(&$query, $attribute, $value = NULL, $sign = '=')
+		{
+			try {
+				if ($value) {
+					$query->orWhere("$attribute $sign ?", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
+
+		static function orWhereIn(&$query, $attribute, $value = NULL)
+		{
+			try {
+				if ($value) {
+				  if (!is_array($value)) $value = array($value);
+					$query->orWhereIn("$attribute", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
 
 		static function andWhereNotIn(&$query, $attribute, $value = NULL)
 		{
