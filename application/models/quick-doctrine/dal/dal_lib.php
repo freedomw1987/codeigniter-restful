@@ -112,12 +112,15 @@
 		    if (!is_array($attribute)) {
 		      $attribute = array($attribute);
 		    }
-		    $q = array();
-		    foreach ($attribute as $attr) {
-          $q[] = "$attr like '%$value%'";
+		    if ($value) {
+		      $q = array();
+  		    foreach ($attribute as $attr) {
+            $q[] = "$attr like '%$value%'";
+  		    }
+  		    $addQuery = implode(' OR ', $q);
+  		    $query->andWhere($addQuery);
 		    }
-		    $addQuery = implode(' OR ', $q);
-		    $query->andWhere($addQuery);
+		    
 		  } catch (Exception $e) {
 		    throw new Exception("[".__METHOD__."]". $e->getMessage(), 1);
 		  }
