@@ -288,7 +288,7 @@ class REST_Controller extends CI_Controller {
 			if (method_exists($this, '_format_'.$this->response->format))
 			{
 				// Set the correct format header
-				header('Content-Type: '.$this->_supported_formats[$this->response->format]. '; charset=utf8');
+				header('Content-Type: '.$this->_supported_formats[$this->response->format]. '; charset=UTF-8');
 
 				$output = $this->{'_format_'.$this->response->format}($data);
 			}
@@ -297,7 +297,7 @@ class REST_Controller extends CI_Controller {
 			elseif (method_exists($this->format, 'to_'.$this->response->format))
 			{
 				// Set the correct format header
-				header('Content-Type: '.$this->_supported_formats[$this->response->format]. '; charset=utf8');
+				header('Content-Type: '.$this->_supported_formats[$this->response->format]. '; charset=UTF-8');
 
 				$output = $this->format->factory($data)->{'to_'.$this->response->format}();
 			}
