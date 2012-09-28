@@ -39,7 +39,7 @@
 		    $q = Doctrine_Query::create()->update(static::$_model_name);
   			$table = Doctrine::getTable(static::$_model_name);
   			foreach ($table->getColumns() as $column => $column_properties){
-  			  if ($column_properties['type'] == 'timestamp') continue;
+  			  if ($column_properties['type'] == 'timestamp' || !isset($option[$column])) continue;
   			  $q->set($column, "'". $option[$column]."'");
   			}
   			$q->where('id = ?', $id);
