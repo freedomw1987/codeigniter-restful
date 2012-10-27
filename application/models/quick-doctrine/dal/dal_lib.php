@@ -106,6 +106,12 @@
 			}
 		}
 		
+		static function between(&$query, $attribute, $start_value, $end_value)
+		{
+		  static::andWhere($query, $attribute, $start_value, ">=");
+		  static::andWhere($query, $attribute, $end_value, "<=");
+		}
+		
 		static function search(&$query, $attribute = array(), $value = NULL)
 		{
 		  try {
