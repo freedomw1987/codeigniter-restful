@@ -4,6 +4,11 @@
   */
   class Dal_lib
   {
+    static function isNull($value)
+    {
+      return ($value == null || $value == '');
+    }
+    
     static function where($option = array())
 		{
 			extract($option);
@@ -51,55 +56,8 @@
 		static function andWhere(&$query, $attribute, $value = NULL, $sign = '=')
 		{
 			try {
-				if ($value) {
+				if (!static::isNull($value)) {
 					$query->andWhere("$attribute $sign ?", $value);
-				}
-			} catch (Exception $e) {
-				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
-			}
-		}
-
-		static function andWhereIn(&$query, $attribute, $value = NULL)
-		{
-			try {
-				if ($value) {
-				  if (!is_array($value)) $value = array($value);
-					$query->andWhereIn("$attribute", $value);
-				}
-			} catch (Exception $e) {
-				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
-			}
-		}
-		
-		static function orWhere(&$query, $attribute, $value = NULL, $sign = '=')
-		{
-			try {
-				if ($value) {
-					$query->orWhere("$attribute $sign ?", $value);
-				}
-			} catch (Exception $e) {
-				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
-			}
-		}
-
-		static function orWhereIn(&$query, $attribute, $value = NULL)
-		{
-			try {
-				if ($value) {
-				  if (!is_array($value)) $value = array($value);
-					$query->orWhereIn("$attribute", $value);
-				}
-			} catch (Exception $e) {
-				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
-			}
-		}
-
-		static function andWhereNotIn(&$query, $attribute, $value = NULL)
-		{
-			try {
-				if ($value) {
-				  if (!is_array($value)) $value = array($value);
-					$query->andWhereNotIn("$attribute", $value);
 				}
 			} catch (Exception $e) {
 				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
@@ -111,6 +69,53 @@
 		  static::andWhere($query, $attribute, $start_value, ">=");
 		  static::andWhere($query, $attribute, $end_value, "<=");
 		}
+
+		static function andWhereIn(&$query, $attribute, $value = NULL)
+		{
+			try {
+				if (!static::isNull($value)) {
+				  if (!is_array($value)) $value = array($value);
+					$query->andWhereIn("$attribute", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
+		
+		static function orWhere(&$query, $attribute, $value = NULL, $sign = '=')
+		{
+			try {
+				if (!static::isNull($value)) {
+					$query->orWhere("$attribute $sign ?", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
+
+		static function orWhereIn(&$query, $attribute, $value = NULL)
+		{
+			try {
+				if (!static::isNull($value)) {
+				  if (!is_array($value)) $value = array($value);
+					$query->orWhereIn("$attribute", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
+
+		static function andWhereNotIn(&$query, $attribute, $value = NULL)
+		{
+			try {
+				if (!static::isNull($value)) {
+				  if (!is_array($value)) $value = array($value);
+					$query->andWhereNotIn("$attribute", $value);
+				}
+			} catch (Exception $e) {
+				throw new Exception("[".__METHOD__."]" .$e->getMessage(), 1);
+			}
+		}
 		
 		static function search(&$query, $attribute = array(), $value = NULL)
 		{
@@ -118,7 +123,7 @@
 		    if (!is_array($attribute)) {
 		      $attribute = array($attribute);
 		    }
-		    if ($value) {
+		    if (!static::isNull($value)) {
 		      $q = array();
   		    foreach ($attribute as $attr) {
             $q[] = "$attr like '%$value%'";
@@ -136,7 +141,7 @@
 		static function andWhereLike(&$query, $attribute, $value = NULL)
 		{
 		  try {
-		    if ($value) {
+		    if (!static::isNull($value)) {
 		      $query->andWhere("$attribute like '%$value%'");
 		    }
 		  } catch (Exception $e) {
@@ -148,10 +153,10 @@
 		static function pagination(&$query, $offset = null, $limit = null)
 		{
 			try {
-				if ($offset) {
+				if (!static::isNull($offset)) {
 					$query->offset($offset);
 				}
-				if ($limit) {
+				if (!static::isNull($limit)) {
 					$query->limit($limit);
 				}
 			} catch (Exception $e) {
